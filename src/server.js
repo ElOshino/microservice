@@ -33,6 +33,7 @@ app.use(require('./routes/libro.routes'));
 app.use(require('./routes/revista.routes'));
 app.use(require('./routes/miembroB.routes'));
 app.use(require('./routes/personalB.routes'));
+app.use(require('./routes/reservarLibros.routes'));
 
 
 app.use((req, res, next) => {

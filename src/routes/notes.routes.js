@@ -6,7 +6,8 @@ const {
     createNewNote, 
     renderNotes, 
     renderEditForm, 
-    updateNote, 
+    updateNote,
+    updateLibroDisponibles,
     deleteNote } = require('../controllers/notes.controller');
 const { render } = require('../server');
 
@@ -23,6 +24,9 @@ router.get('/notes', renderNotes);
 router.get('/notes/edit/:id', renderEditForm);
 
 router.put('/notes/edit/:id', updateNote);
+
+router.put('/reservar/edit/:id', updateLibroDisponibles);
+
 
 //delete
 router.delete('/notes/delete/:id', deleteNote);

@@ -5,10 +5,11 @@ const app = require('../server');
 PersonalBCtrl.createNewPersonal = async (req, res) => {
 
     const { nombre, copiasLibro, copiasRevistas } = req.body;
-    const newPersonal = new Personal({ nombre, copiasLibro, copiasRevistas });
+    const newPersonal = new Personal({ nombre });
     await newPersonal.save()
         .then(
             res.status(200).json({ status: 'SUCCESS' })
+            
         ).catch(
             error => res.status(500).send(error)
         );

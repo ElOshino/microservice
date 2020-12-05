@@ -7,4 +7,4 @@ const MienbroBibliotecaSchema = new Schema ({
     timestamps: true
 });
 
-module.exports = model('MienbroBibliotecaSchema', MienbroBibliotecaSchema); 
+module.exports = model('MienbroBiblioteca', MienbroBibliotecaSchema); 

@@ -8,4 +8,4 @@ const PersonalBibliotecaSchema = new Schema ({
     timestamps: true
 });
 
-module.exports = model('PersonalBibliotecaSchema', PersonalBibliotecaSchema); 
+module.exports = model('PersonalBiblioteca', PersonalBibliotecaSchema); 
