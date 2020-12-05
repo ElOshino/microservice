@@ -5,7 +5,7 @@ const app = require('../server');
 PersonalBCtrl.createNewPersonal = async (req, res) => {
 
     const { nombre, copiasLibro, copiasRevistas } = req.body;
-    const newPersonal = new Personal({ nombre });
+    const newPersonal = new Personal({ nombre,  copiasLibro: undefined, copiasLibro:undefined });
     await newPersonal.save()
         .then(
             res.status(200).json({ status: 'SUCCESS' })

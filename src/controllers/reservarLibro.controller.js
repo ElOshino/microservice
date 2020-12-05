@@ -138,14 +138,14 @@ ReservaLibrosCtrl.updateRevistasPersonalDisponibles = async (req, res) => {
 
             await Revistas.findByIdAndUpdate(id, { copiasDisponibles: newLibroObject.copiasDisponibles - 1 })
                 .then(
-                    console.log('libro retirado', id)
+                    console.log('revista retirado', id)
                 ).catch(
                     error => res.status(500).send(error)
                 );
 
-                await Revistas.findByIdAndUpdate(idMiembro, { $set: { copiasRevistas: mongoose.Types.ObjectId(id) } }).then(
-                console.log('libro cargado a ', idMiembro),
-                res.status(200).send({ indicacion: 'copia de Tevista retirada' })
+                await Personal.findByIdAndUpdate(idMiembro,{ $set :  { copiasRevistas: mongoose.Types.ObjectId(id) }} ).then(
+                console.log('revista cargado a ', idMiembro),
+                res.status(200).send({ indicacion: 'copia de Revista retirada' })
             ).catch(
                 error => res.status(500).send(error)
             );
@@ -156,7 +156,7 @@ ReservaLibrosCtrl.updateRevistasPersonalDisponibles = async (req, res) => {
             ).catch(
                 error => res.status(500).send(error)
             );
-            await Personal.findByIdAndUpdate(idMiembro, { $set: { copiasLibro: undefined  } }).then(
+            await Personal.findByIdAndUpdate(idMiembro, { $set: { copiasRevistas: undefined  } }).then(
                 console.log('libro cargado a ', idMiembro),
                 res.status(200).send({ indicacion: 'copia de Revista retirada' })
             ).catch(

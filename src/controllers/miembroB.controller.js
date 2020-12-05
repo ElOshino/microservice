@@ -5,7 +5,7 @@ const app = require('../server');
 miembrosBCtrl.createNewMiembro = async (req, res) => {
 
     const { nombre, copiasLibro } = req.body;
-    const newMiembro = new Miembro({ nombre });
+    const newMiembro = new Miembro({ nombre, copiasLibro:undefined });
     await newMiembro.save()
         .then(
             res.status(200).json({ status: 'SUCCESS' })
