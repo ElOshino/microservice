@@ -44,43 +44,13 @@ LibrosCtrl.ObtenerLibro = async (req, res) => {
 
 
 LibrosCtrl.updateLibroDisponibles = async (req, res) => {
-    var opcion = req.body.opcion;
-    var newLibroObject;
-
-    console.log('llego al metodo')
-    await Libro.findById(req.params.id).then(
-        libro => {
-            newLibroObject = {
-                id: libro.id,
-                nombre: libro.nombre,
-                copias: libro.copias,
-                copiasDisponibles: libro.copiasDisponibles
-            }
-        }).catch(error => console.log(error));
-
-
-    if (opcion == 1) {
-        if (newLibroObject.copiasDisponibles == 0) {
-            res.status(500).json({ error: 'sin copias disponibles' })
-        } else if (newLibroObject.copiasDisponibles >= 1) {
-            await Libro.findByIdAndUpdate(req.params.id, {  copiasDisponibles: newLibroObject.copiasDisponibles - 1  })
-                .then(
-                    res.status(200).json({ indicacion: 'copia de libro retirada' })
-                ).catch(
-                    error => res.status(500).json(error)
-                );
-        }
-    } else if (opcion == 2) {
-        if(newLibroObject.copiasDisponibles >= newLibroObject.copias ){
-            res.status(500).json({ error: 'maximo de copias alcanzado' })
-        }
-        await Libro.findByIdAndUpdate(req.params.id, { $set: { copiasDisponibles: newLibroObject.copiasDisponibles + 1 } })
-            .then(
-                res.status(200).json({ indicacion: 'copia de libro retirada' })
-            ).catch(
-                error => res.status(500).json(error)
-            );
-    }
+    const { nombre, copias, copiasDisponibles } = req.body;
+    console.log(req.body)
+    await Note.findByIdAndUpdate(req.params.id, { nombre, copias, copiasDisponibles}).then(
+        res.status(200).json({ status: 'cambios guardados' })
+    ).catch(
+        error => res.status(500).send(error)
+    );
 };
 
 LibrosCtrl.deleteLibro = async (req, res) => {
