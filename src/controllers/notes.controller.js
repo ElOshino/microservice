@@ -3,6 +3,12 @@ const notesCtrl = {};
 const Note = require('../models/Note');
 const { request } = require('../server');
 
+let respuesta = {
+    error: false,
+    codigo: 200,
+    mensaje: '',
+};
+
 notesCtrl.inicio = (req, res) => {
     res.send('microservicio Arriba');
 };
@@ -17,23 +23,19 @@ notesCtrl.createNewNote = async (req, res) => {
     ).catch(
         error => res.status(500).send(error)
     );
-
-    
 };
 
 notesCtrl.renderNotes = async (req, res) => {
-    await Note.find().then(notas => {
-        const newNotaObject = {
-            nota: notas.map(data => {
-                return {
-                    id: data.id,
-                    title: data.title,
-                    description: data.description
-                }
-            })
-        }
-        res.send({ nota: newNotaObject.nota })
-    }).catch(error => res.status(500).send(error));
+    await Note.find()
+        .exec()
+        .then(doc => {
+            console.log("From database", doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err });
+        });
 };
 
 notesCtrl.renderEditForm = async (req, res) => {
@@ -43,8 +45,9 @@ notesCtrl.renderEditForm = async (req, res) => {
             title: nota.title,
             description: nota.description
         }
-        res.send({ nota: newNotaObject })
-    }).catch(error => res.status(500).send(error))
+        console.log({ nota: newNotaObject })
+        res.status(200).json({ nota: newNotaObject })
+    }).catch(error => console.log(error))
 };
 
 notesCtrl.updateNote = async (req, res) => {
