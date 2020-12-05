@@ -26,9 +26,15 @@ app.use((req, res, next) => {
     }
     next();
 });
+
 //routes
 app.use(require('./routes/notes.routes'));
 app.use(require('./routes/libro.routes'));
+app.use(require('./routes/revista.routes'));
+app.use(require('./routes/miembroB.routes'));
+app.use(require('./routes/personalB.routes'));
+
+
 app.use((req, res, next) => {
     const error = new Error('Not found');
     error.status = 404;

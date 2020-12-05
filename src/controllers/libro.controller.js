@@ -46,7 +46,7 @@ LibrosCtrl.ObtenerLibro = async (req, res) => {
 LibrosCtrl.updateLibroDisponibles = async (req, res) => {
     const { nombre, copias, copiasDisponibles } = req.body;
     console.log(req.body)
-    await Note.findByIdAndUpdate(req.params.id, { nombre, copias, copiasDisponibles}).then(
+    await Libro.findByIdAndUpdate(req.params.id, { nombre, copias, copiasDisponibles}).then(
         res.status(200).json({ status: 'cambios guardados' })
     ).catch(
         error => res.status(500).send(error)
@@ -61,18 +61,6 @@ LibrosCtrl.deleteLibro = async (req, res) => {
     );
 
 };
-
-
-
-
-
-function retirarLibro(theObject) {
-
-};
-
-function devolverLibro(theObject) {
-    theObject.make = 'Toyota';
-}
 
 
 module.exports = LibrosCtrl;
